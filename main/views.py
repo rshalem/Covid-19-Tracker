@@ -23,13 +23,28 @@ def country(request):
     url = 'https://covid19.mathdro.id/api/confirmed'
     response = requests.get(url).json()
 
-    #all_data = []
-    # for item in response:
-    #     name = item['combinedKey']
-    #     all_data.append(name)
+    all_data = []
+    for item in response:
+        name = item['combinedKey']
+        confirmed = item['confirmed']
+        recovered = item['recovered']
+        deaths = item['deaths']
+        active = item['active']
 
-    all_data = [item['combinedKey'] for item in response]
+        # {'name': [all names list], 'confirmed': [confirmed list], etc}
+        total = {
+             'name': name,
+             "confirmed": confirmed,
+             "recovered": recovered,
+             "deaths": deaths,
+             "active": active,
+        }
+        all_data.append(total)
 
+    #all_data = [item['combinedKey'] for item in response]
 
     context = {'all_data': all_data}
-    return render(request, 'index.html', context=context)
+    return render(request, 'country_view.html', context=context)
+
+def country_detail(request, name):
+    pass

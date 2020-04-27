@@ -157,8 +157,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total confirmed</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ values.confirmed }}</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Country with highest cases</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ d}}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -253,7 +253,7 @@
                     <tbody>
                     {% for data in all_data %}
                       <tr>
-                        <th scope="row">{{ data.name }}</th>
+                        <th scope="row"><a href="{{ data.name }}">{{ data.name }}</a></th>
                         <td>{{ data.confirmed }}</td>
                         <td>{{ data.recovered }}</td>
                         <td>{{ data.active }}</td>

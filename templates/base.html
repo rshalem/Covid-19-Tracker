@@ -18,12 +18,24 @@
 
   <!-- Custom styles for this template-->
   <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+  <link href="{% static 'css/scroll.css' %}" rel="stylesheet">
 
 </head>
 
 {% block content %}
 
 {% endblock %}
+
+<!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Covid Tracker. Created by @rshalem</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
 
 <!-- Bootstrap core JavaScript-->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
@@ -41,3 +53,5 @@
   <!-- Page level custom scripts -->
   <script src="{% static 'js/demo/chart-area-demo.js'%}"></script>
   <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+
+
