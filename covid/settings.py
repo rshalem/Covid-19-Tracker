@@ -99,6 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#NEWS_API_KEY = '66c90e23bb0443b8ae9594cd66fc7817'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
