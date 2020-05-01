@@ -1,16 +1,17 @@
 import requests
 from django.shortcuts import render
-from datetime import datetime
+import datetime
 
 
+d = datetime.datetime.now()
 def home(request):
 
-    #date = datetime.date()
+
     # timeline is the resource
     url = 'https://corona-api.com/timeline'
 
 
-    response = requests.get(url).json()
+    response = requests.get(url, timeout=2).json()
 
     # # news api
 
@@ -54,7 +55,7 @@ def country(request):
 
 def news(request):
 
-    news_url = 'https://newsapi.org/v2/everything?q=COVID&from=2020-04-29&sortBy=publishedAt&' \
+    news_url = 'https://newsapi.org/v2/everything?q=COVID&from=d&sortBy=publishedAt&' \
                'apiKey=66c90e23bb0443b8ae9594cd66fc7817&pageSize=10&page=1'
     news_response = requests.get(news_url).json()
     article = news_response['articles']
@@ -86,4 +87,24 @@ def news(request):
 
 
 def country_detail(request, name):
-    pass
+    url = 'https://covid19.mathdro.id/api/countries/'+ name
+    response = requests.get(url).json()
+
+    country_confirm = response['confirmed']
+    country_recover = response['recovered']
+    country_death = response['deaths']
+
+    confirm = country_confirm['value']
+    recover = country_recover['value']
+    death = country_death['value']
+
+    country_data = {
+        "confirm": confirm,
+        "recovered": recover,
+        "deaths": death
+    }
+
+
+    return render(request, 'country_detail.html', {'country_data':country_data})
+
+
