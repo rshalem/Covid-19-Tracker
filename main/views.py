@@ -11,7 +11,7 @@ def home(request):
     url = 'https://corona-api.com/timeline'
 
 
-    response = requests.get(url, timeout=2).json()
+    response = requests.get(url).json()
 
     # # news api
 
@@ -54,6 +54,11 @@ def country(request):
     return render(request, 'country_view.html', context=context)
 
 def news(request):
+    """
+
+    :param request:
+    :return:
+    """
 
     news_url = 'https://newsapi.org/v2/everything?q=COVID&from=d&sortBy=publishedAt&' \
                'apiKey=66c90e23bb0443b8ae9594cd66fc7817&pageSize=10&page=1'
@@ -87,7 +92,14 @@ def news(request):
 
 
 def country_detail(request, name):
-    url = 'https://covid19.mathdro.id/api/countries/'+ name
+
+    """
+
+    :param request:
+    :param name:
+    :return:
+    """
+    url = 'https://covid19.mathdro.id/api/countries/' + name
     response = requests.get(url).json()
 
     country_confirm = response['confirmed']
@@ -104,7 +116,6 @@ def country_detail(request, name):
         "deaths": death
     }
 
-
-    return render(request, 'country_detail.html', {'country_data':country_data})
+    return render(request, 'country_detail.html', {'country_data': country_data})
 
 
