@@ -143,43 +143,25 @@
 
           <!-- Content Row -->
 
-          <div class="row">
+
 
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Country wise Data </h6>
-                </div>
-
                 <!-- Card Body -->
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
                   <table class="table table-bordered table-striped mb-0">
 
-                      <div class="card-body">
-                        {% for news in all_news %}
 
-                            <div class="row">
-                              <div class="col-lg-20 mb-4">
-                               <div class="card bg-primary text-white shadow">
-                                <div class="card-body">
-                                  {{ news.t }}
-                                  <br>
-                                  <br>
-                                  <!--<img src="{{ news.i }}" alt="">-->
-                                  <br>
-                                  <br>
-                                  <a href="{{ news.u }}">{{ news.u }}</a>
-
-                                </div>
-                               </div>
-                              </div>
+                      <div class="news_card">
+                          <h2 class="text-center">Global Headlines on COVID-19</h2>
+                          {% for news in all_news %}
+                            <div class="news_container" style="margin-top:2rem;" id="news">
+                                {{ news.t }}
+                                <a href="{{ news.u }}">{{ news.u }}</a>
                             </div>
-                        {% endfor %}
-
+                          {% endfor %}
                       </div>
+
                   </table>
                 </div>
 

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700&display=swap');
+body{
+  background:white;
+  color:black;
+}
+
+.card {
+  text-align: initial;
+  color:black;
+  border:none;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 3rem;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 2rem;
+}

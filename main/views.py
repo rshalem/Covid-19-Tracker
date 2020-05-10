@@ -23,6 +23,7 @@ def home(request):
                               /(response['data'][0]['confirmed'])*100),
     }
 
+
     return render(request, 'index.html', {'values': values})
 
 def country(request):
@@ -60,10 +61,9 @@ def news(request):
     :return:
     """
 
-    news_url = 'https://newsapi.org/v2/everything?q=COVID&from=d&sortBy=publishedAt&' \
-               'apiKey=66c90e23bb0443b8ae9594cd66fc7817&pageSize=10&page=1'
+    news_url = 'https://cryptic-ravine-96718.herokuapp.com/'
     news_response = requests.get(news_url).json()
-    article = news_response['articles']
+    article = news_response['news']
 
 
     all_news = []
@@ -76,8 +76,8 @@ def news(request):
 
     for single_article in article:
         t = single_article['title']
-        u = single_article['url']
-        i = single_article['urlToImage']
+        u = single_article['link']
+        i = single_article['img']
 
         all = {
             "t": t,
