@@ -61,9 +61,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+
           </div>
         </div>
       </li>
@@ -86,12 +84,10 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Login Screens:</h6>
             <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Other Pages:</h6>
             <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
           </div>
         </div>
       </li>
@@ -286,6 +282,8 @@
                         <div class="news_card">
                           {% for news in all_news %}
                             <div class="news_container" style="margin-top:2rem;" id="news">
+                                <img src="{{news.i}}" height="300px" width="380px">
+                                <br>
                                 {{ news.t }}
                                 <a href="{{ news.u }}">{{ news.u }}</a>
                             </div>
