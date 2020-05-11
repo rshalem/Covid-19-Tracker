@@ -4,17 +4,28 @@ import datetime
 
 
 d = datetime.datetime.now()
-def home(request):
 
+
+def index(request):
+
+    # function calling, whose return values are contexts(dict)
+    all_cases = world_cases()
+    country_cases = country_wise_cases()
+    all_news = news()
+
+    # context as a dict, functions as **kwargs
+    context = dict(all_cases, **country_cases, **all_news)
+    return render(request, 'index.html', context=context)
+
+
+# below are the individual functions for diff section of content, returning all data as a dictionary value
+def world_cases():
 
     # timeline is the resource
     url = 'https://corona-api.com/timeline'
-
-
     response = requests.get(url).json()
 
     # # news api
-
     values = {
         "confirmed": response['data'][0]['confirmed'],
         "recovered": response['data'][0]['recovered'],
@@ -23,10 +34,9 @@ def home(request):
                               /(response['data'][0]['confirmed'])*100),
     }
 
+    return {'values': values}
 
-    return render(request, 'index.html', {'values': values})
-
-def country(request):
+def country_wise_cases():
 
     url = 'https://covid19.mathdro.id/api/confirmed'
     response = requests.get(url).json()
@@ -51,10 +61,9 @@ def country(request):
 
     #all_data = [item['combinedKey'] for item in response]
 
-    context = {'all_data': all_data}
-    return render(request, 'country_view.html', context=context)
+    return {'all_data': all_data}
 
-def news(request):
+def news():
     """
 
     :param request:
@@ -64,7 +73,6 @@ def news(request):
     news_url = 'https://cryptic-ravine-96718.herokuapp.com/'
     news_response = requests.get(news_url).json()
     article = news_response['news']
-
 
     all_news = []
 
@@ -87,8 +95,7 @@ def news(request):
 
         all_news.append(all)
 
-    context = {'all_news': all_news}
-    return render(request, 'news.html', context=context)
+    return {'all_news': all_news}
 
 
 def country_detail(request, name):
@@ -99,8 +106,10 @@ def country_detail(request, name):
     :param name:
     :return:
     """
+
     url = 'https://covid19.mathdro.id/api/countries/' + name
     response = requests.get(url).json()
+
 
     country_confirm = response['confirmed']
     country_recover = response['recovered']
@@ -117,5 +126,3 @@ def country_detail(request, name):
     }
 
     return render(request, 'country_detail.html', {'country_data': country_data})
-
-

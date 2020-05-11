@@ -4,10 +4,7 @@ from main import views
 app_name = 'main'
 urlpatterns = [
 
-    path('', views.home, name='homepage'),
-    path('news/', views.news, name='news'),
-
-    path('countries/', views.country, name='countries'),
+    path('', views.index, name='homepage'),
     path('countries/<name>', views.country_detail, name='country-detail'),
 
 ]

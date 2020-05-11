@@ -47,8 +47,6 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="{% url 'main:countries' %}">Country wise</a>
-            <a class="collapse-item" href="{% url 'main:news' %}">News</a>
           </div>
         </div>
       </li>
@@ -145,9 +143,6 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Total Cases worldwide </h1>
-            <a href="{% url 'main:countries' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Country wise </a>
-            <a href="{% url 'main:news' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> News </a>
-
           </div>
 
           <!-- Content Row -->
@@ -258,9 +253,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                    {% for d in all %}
+                    {% for d in all_data %}
                       <tr>
-                        <th scope="row">{{ d.state }}</th>
+                          <th scope="row"> <a href="{% url 'main:country-detail' d.name %}">{{ d.name}}</a></th>
                         <td>{{ d.confirmed }}</td>
                         <td>{{ d.recovered }}</td>
                         <td>{{ d.active }}</td>
@@ -279,28 +274,24 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Searched Country Data</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Global Headlines</h6>
 
                 </div>
+
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
                 <!-- Card Body -->
                   <!-- Country wise reports card-->
 
-                <div class="card-body">
-                    {% for news in all_news %}
-
-                        <div class="row">
-                          <div class="col-lg-6 mb-4">
-                           <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                              {{ news }}
-
+                    <div class="card-body">
+                        <div class="news_card">
+                          {% for news in all_news %}
+                            <div class="news_container" style="margin-top:2rem;" id="news">
+                                {{ news.t }}
+                                <a href="{{ news.u }}">{{ news.u }}</a>
                             </div>
-                           </div>
-                          </div>
+                          {% endfor %}
                         </div>
-                    {% endfor %}
-
-
+                    </div>
                 </div>
               </div>
             </div>
