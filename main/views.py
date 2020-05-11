@@ -1,10 +1,5 @@
 import requests
 from django.shortcuts import render
-import datetime
-
-
-d = datetime.datetime.now()
-
 
 def index(request):
 
@@ -92,7 +87,6 @@ def news():
             "u": u,
             "i": i,
         }
-
         all_news.append(all)
 
     return {'all_news': all_news}
@@ -101,7 +95,6 @@ def news():
 def country_detail(request, name):
 
     """
-
     :param request:
     :param name:
     :return:
