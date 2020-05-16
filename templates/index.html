@@ -21,16 +21,6 @@
       </a>
 
       <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'main:homepage' %}">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
-
-      <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Heading -->
@@ -122,7 +112,7 @@
           {% csrf_token %}
             <div class="input-group">
               <!--<input type="text" class="form-control bg-light border-0 small" placeholder="Enter ISO 3166 format County Code" aria-label="Search" aria-describedby="basic-addon2">-->
-              <input type="text" class="form-control bg-light border-0 small" name="country_name"  placeholder="Country ISO 3166 name" required/>
+              <input type="text" class="form-control bg-light border-0 small" name="country_name"  placeholder="Country name" required/>
               <div class="input-group-append">
                 <button class="btn btn-primary" type="submit" name="action">Search </button>
               </div>
@@ -231,7 +221,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Country wise Data </h6> <i class="fas fa-table "></i>
+                  <h5 class="m-0 font-weight-light text-black-100">Country wise Data </h5> <i class="fas fa-table "></i>
                 </div>
 
                 <!-- Card Body -->
@@ -260,8 +250,137 @@
                     </tbody>
                   </table>
                 </div>
-
               </div>
+
+            <!-- india wise all data -->
+              <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">India </h1>
+              </div>
+              <div class="row">
+                  <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total confirmed</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total.confirmed }} </div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-virus fa-2x text-gray-300"></i>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Recovered</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total.recovered }} </div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-shield fa-2x text-gray-300"></i>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Deaths</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total.deaths }} </div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-skull-crossbones fa-2x text-gray-300"></i>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+            <!-- state wise table -->
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h5 class="m-0 font-weight-light text-primary" style="color:black">Indian state-wise data </h5> <i class="fas fa-table "></i>
+                </div>
+
+                <!-- Card Body -->
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                  <table class="table table-bordered table-striped mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">State Name</th>
+                        <th scope="col">Confirmed</th>
+                        <th scope="col">Recovered</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Death</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for st in all_state_data %}
+                      <tr>
+                        <th scope="row"> <a href="#">{{ st.state}}</a></th>
+                        <td>{{ st.confirmed }}</td>
+                        <td>{{ st.recovered }}</td>
+                        <td>{{ st.active }}</td>
+                        <td>{{ st.deaths }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+                <!-- guidelines -->
+                <br>
+                <h4 class="glyphicon-text-color">Guidelines for staying safe </h4>
+                <div class="card-deck">
+                  <div class="card">
+                    <img src="/static/img/130-COVID-Virus.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="/static/img/125-wash-hand.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title"> Clean hands protect against infection</h5>
+                      <p class="card-text" style="size:1px">
+                        Clean your hands regularly.
+                        Wash your hands with soap and water, and dry them thoroughly.
+                        Use alcohol-based handrub if you don’t have immediate access to soap and water.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="/static/img/124-sanitizer.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Social distancing</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    </div>
+                  </div>
+                </div>
             </div>
 
 
@@ -291,8 +410,23 @@
                         </div>
                     </div>
                 </div>
+
+              </div>
+              <br>
+              <br>
+              <div class="card">
+                <img src="/static/img/107-healthy.png" class="card-img-top" alt="">
+                <div class="card-body">
+                  <h5 class="card-title">Eat healthy !</h5>
+                  <p class="card-text">Have foods rich in vitamin C, D. Have turmeric & garlic,
+                      Drink warm water throughout the day. regularly consume vegetables and fruits rich in Beta carotene
+                      , Ascorbic acid & other essential vitamins. Certain foods like mushrooms, tomato, bell pepper and
+                      green vegetables like broccoli, spinach are also good options to build resilience in the body
+                      against infections</p>
+                </div>
               </div>
             </div>
+
           </div>
 
 

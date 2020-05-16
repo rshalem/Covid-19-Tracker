@@ -7,9 +7,10 @@ def index(request):
     all_cases = world_cases()
     country_cases = country_wise_cases()
     all_news = news()
+    all_indian_data = indian_data()
 
     # context as a dict, functions as **kwargs
-    context = dict(all_cases, **country_cases, **all_news)
+    context = dict(all_cases, **country_cases, **all_news, **all_indian_data)
     return render(request, 'index.html', context=context)
 
 
@@ -20,13 +21,14 @@ def world_cases():
     url = 'https://corona-api.com/timeline'
     response = requests.get(url).json()
 
-    # # news api
+    increase = round(((response['data'][0]['confirmed'] - response['data'][1]['confirmed'])
+     / (response['data'][0]['confirmed']) * 100),2)
+
     values = {
         "confirmed": response['data'][0]['confirmed'],
         "recovered": response['data'][0]['recovered'],
         "deaths": response['data'][0]['deaths'],
-        "per_increase": ((response['data'][0]['confirmed']-response['data'][1]['confirmed'])
-                              /(response['data'][0]['confirmed'])*100),
+        "per_increase": increase
     }
 
     return {'values': values}
@@ -56,21 +58,45 @@ def country_wise_cases():
 
     #all_data = [item['combinedKey'] for item in response]
 
-    return {'all_data': all_data}
+    return {'all_data': all_data[1:]}
+
+def indian_data():
+    url = 'https://api.covid19india.org/data.json'
+
+    response = requests.get(url).json()
+    statewise_response = response['statewise']
+
+
+    all_state_data = []
+    for data in statewise_response:
+        state = data['state']
+        active = data['active']
+        confirmed = data['confirmed']
+        deaths = data['deaths']
+        recovered = data['recovered']
+
+        # above returns VALUE as a string from state KEY
+        # creating key value pair of all strings to an individual key
+        datas = {
+            'state': state,
+            'active': active,
+            'confirmed': confirmed,
+            'deaths': deaths,
+            'recovered': recovered
+        }
+        # [{}, {}, {}]
+        all_state_data.append(datas)
+
+    # expected dict to be returned & stored in the context var inside index fnc
+    return {'all_state_data': all_state_data[1:], 'total': all_state_data[0]}
 
 def news():
-    """
-
-    :param request:
-    :return:
-    """
 
     news_url = 'https://cryptic-ravine-96718.herokuapp.com/'
     news_response = requests.get(news_url).json()
     article = news_response['news']
 
     all_news = []
-
     # article contains list of dictionaries
     # we need to loop over it to get single-single dictionary
     # from that single article we're gonna fetch the value corresponding that key
