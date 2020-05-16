@@ -22,7 +22,7 @@ def world_cases():
     response = requests.get(url).json()
 
     increase = round(((response['data'][0]['confirmed'] - response['data'][1]['confirmed'])
-     / (response['data'][0]['confirmed']) * 100),2)
+     / (response['data'][0]['confirmed']) * 100), 2)
 
     values = {
         "confirmed": response['data'][0]['confirmed'],
@@ -65,7 +65,6 @@ def indian_data():
 
     response = requests.get(url).json()
     statewise_response = response['statewise']
-
 
     all_state_data = []
     for data in statewise_response:
