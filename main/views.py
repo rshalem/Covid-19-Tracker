@@ -8,9 +8,10 @@ def index(request):
     country_cases = country_wise_cases()
     all_news = news()
     all_indian_data = indian_data()
+    all_essentials = essentials()
 
     # context as a dict, functions as **kwargs
-    context = dict(all_cases, **country_cases, **all_news, **all_indian_data)
+    context = dict(all_cases, **country_cases, **all_news, **all_indian_data, **all_essentials)
     return render(request, 'index.html', context=context)
 
 
@@ -87,7 +88,7 @@ def indian_data():
         all_state_data.append(datas)
 
     # expected dict to be returned & stored in the context var inside index fnc
-    return {'all_state_data': all_state_data[1:], 'total': all_state_data[0]}
+    return {'all_state_data': all_state_data[1:], 'total_cases': all_state_data[0]}
 
 def news():
 
@@ -144,3 +145,33 @@ def country_detail(request, name):
     }
 
     return render(request, 'country_detail.html', {'country_data': country_data})
+
+def essentials():
+    """
+    provides all the essential & resources related to covid 19 india
+    :return:
+    """
+    url = 'https://api.covid19india.org/resources/resources.json'
+    response = requests.get(url).json()
+
+    resource = response['resources']
+    all_resource = []
+    for single_res in resource:
+        category = single_res['category']
+        city = single_res['city']
+        contact = single_res['contact']
+        description = single_res['descriptionandorserviceprovided']
+        state = single_res['state']
+
+        # above all return values (here string) associated to the keys
+
+        datas = {
+            'category': category,
+            'city': city,
+            'contact': contact,
+            'state': state,
+            'description': description
+        }
+        # now we assign each value to a key & loop goes on
+        all_resource.append(datas)
+    return {'all_resource': all_resource}

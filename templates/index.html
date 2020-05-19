@@ -257,14 +257,14 @@
                 <h1 class="h3 mb-0 text-gray-800">India </h1>
               </div>
               <div class="row">
-                  <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="col-xl-3 col-md-8 mb-4">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total confirmed</div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total.confirmed }} </div>
+                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total_cases.confirmed }} </div>
                               </div>
                             </div>
                             <div class="col-auto">
@@ -276,14 +276,14 @@
                       </div>
                   </div>
 
-                  <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="col-xl-3 col-md-10 mb-4">
                       <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Recovered</div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total.recovered }} </div>
+                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total_cases.recovered }} </div>
                               </div>
                             </div>
                             <div class="col-auto">
@@ -300,9 +300,9 @@
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Deaths</div>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"style="color: red">Deaths</div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total.deaths }} </div>
+                                  <div class="animated fadeInUp" style="animation-delay: 0.3s"> {{ total_cases.deaths }} </div>
                               </div>
                             </div>
                             <div class="col-auto">
@@ -319,7 +319,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h5 class="m-0 font-weight-light text-primary" style="color:black">Indian state-wise data </h5> <i class="fas fa-table "></i>
+                  <h5 class="m-0 font-weight-light text-black-100">Indian state-wise data </h5> <i class="fas fa-table "></i>
                 </div>
 
                 <!-- Card Body -->
@@ -346,6 +346,37 @@
                       </tr>
                     {% endfor %}
                     </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h5 class="m-0 font-weight-light text-black-100">Essential resources (India) </h5> <i class="fas fa-table "></i>
+                </div>
+
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by city name...">
+                <!-- Card Body -->
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                  <table id="myTable">
+                      <tr class="header">
+                        <th style="width:20%;">Category</th>
+                        <th style="width:10%;">City</th>
+                        <th style="width:5%;">Contact</th>
+                        <th style="width:10%;">State</th>
+                        <th style="width:10%;">Description</th>
+                      </tr>
+                      {% for resource in all_resource %}
+                      <tr>
+                        <td>{{ resource.category }}</td>
+                        <td>{{ resource.city }}</td>
+                        <td><a href="{{ resource.contact }}">{{ resource.contact }}</a></td>
+                        <td>{{ resource.state }}</td>
+                        <td>{{ resource.description }}</td>
+                      </tr>
+                      {% endfor %}
                   </table>
                 </div>
               </div>
@@ -410,22 +441,44 @@
                         </div>
                     </div>
                 </div>
-
               </div>
+            <!-- cards -->
               <br>
               <br>
+              <div class="card-deck">
+                  <div class="card">
+                    <img src="/static/img/107-healthy.png" class="card-img-top" alt="">
+                    <div class="card-body">
+                      <h5 class="card-title">Eat healthy !</h5>
+                      <p class="card-text">Have foods rich in vitamin C, D. Have turmeric & garlic,
+                          Drink warm water throughout the day. regularly consume vegetables and fruits rich in Beta carotene
+                          , Ascorbic acid & other essential vitamins. Certain foods like mushrooms, tomato, bell pepper and
+                          green vegetables like broccoli, spinach are also good options to build resilience in the body
+                          against infections</p>
+                    </div>
+                  </div>
+              </div>
+
               <div class="card">
-                <img src="/static/img/107-healthy.png" class="card-img-top" alt="">
+                <img src="/static/img/129-wear-mask.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Eat healthy !</h5>
-                  <p class="card-text">Have foods rich in vitamin C, D. Have turmeric & garlic,
-                      Drink warm water throughout the day. regularly consume vegetables and fruits rich in Beta carotene
-                      , Ascorbic acid & other essential vitamins. Certain foods like mushrooms, tomato, bell pepper and
-                      green vegetables like broccoli, spinach are also good options to build resilience in the body
-                      against infections</p>
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
               </div>
-            </div>
+              <div class="card">
+                <img src="/static/img/126-namaste-no-hand-shake.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"> Clean hands protect against infection</h5>
+                  <p class="card-text" style="size:1px">
+                    Clean your hands regularly.
+                    Wash your hands with soap and water, and dry them thoroughly.
+                    Use alcohol-based handrub if you don’t have immediate access to soap and water.
+                  </p>
+                </div>
+              </div>
+
 
           </div>
 
